@@ -37,7 +37,7 @@ async function ensureLogin() {
                 const res = await callApifetch({ action: 'checkSession' });
 
                 if (res.ok) {
-                    const isAdmin = (res.user.dept === "管理員");
+                    const isAdmin = (res.user.role === "管理員");
 
                     // 🌟 關鍵修正：儲存 isAdmin 狀態
                     localStorage.setItem("isAdmin", isAdmin ? 'true' : 'false');
