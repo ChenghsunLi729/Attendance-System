@@ -25,7 +25,7 @@
 const LINE_CHANNEL_ID     = PropertiesService.getScriptProperties().getProperty("LINE_CHANNEL_ID");
 const LINE_CHANNEL_SECRET = PropertiesService.getScriptProperties().getProperty("LINE_CHANNEL_SECRET");
 // 新增你的前端回呼網址
-const LINE_REDIRECT_URL   = "https://github.com/0rigind1865-bit/Attendance-System";
+const LINE_REDIRECT_URL   = "https://github.com/ChenghsunLi729/Attendance-System";
 
 const SHEET_EMPLOYEES = '員工名單';
 const SHEET_ATTENDANCE = '打卡紀錄';
