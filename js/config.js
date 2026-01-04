@@ -21,9 +21,9 @@ Please credit "0J (Lin Jie / 0rigin1856)" when redistributing or modifying this 
 
 const API_CONFIG = {
   // 正式環境的 API URL
-  apiUrl: "https://script.google.com/macros/s/AKfycbwvbKaLYQuoT4FyxtqYbEhIDPzASEyc7i7FwZOXaAGhJzIrzx_zIbRopvyOBluWrTj3/exec",
+  apiUrl: "https://script.google.com/macros/s/AKfycbxAlQjOgCKcMI9oH1ksSDovSzHLPAQmSSCnXSdFAk-ztglDjmxKlkqPJ2u909YMHaYZzA/exec",
   // 新增回呼網址
-  redirectUrl: "https://script.google.com/macros/s/AKfycbwvbKaLYQuoT4FyxtqYbEhIDPzASEyc7i7FwZOXaAGhJzIrzx_zIbRopvyOBluWrTj3/exec"
+  redirectUrl: "https://script.google.com/macros/s/AKfycbxAlQjOgCKcMI9oH1ksSDovSzHLPAQmSSCnXSdFAk-ztglDjmxKlkqPJ2u909YMHaYZzA/exec"
   // 你也可以在這裡加入其他設定，例如：
   // timeout: 5000,
   // version: 'v1.0'
