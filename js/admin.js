@@ -940,7 +940,6 @@ function setupRequestToggle() {
     toggleButton.addEventListener('click', toggleCollapse);
 }
 
-
 /**
  * 統一管理員頁面事件的綁定
  */
@@ -949,8 +948,8 @@ function initAdminEvents() {
     adminSelectEmployee.addEventListener('change', async (e) => {
 
         adminSelectedUserId = e.target.value; // 來自 state.js
-        currentManagingEmployee = allEmployeeList.find(emp => emp.userId === adminSelectedUserId);;
-
+        currentManagingEmployee = allEmployeeList.find(emp => emp.userId === adminSelectedUserId);
+        console.log("111Selected employee for calendar:", currentManagingEmployee);
         if (adminSelectedUserId) {
             adminEmployeeCalendarCard.style.display = 'block';
             await renderAdminCalendar(adminSelectedUserId, adminCurrentDate); // 來自 state.js
@@ -963,6 +962,9 @@ function initAdminEvents() {
     adminSelectEmployeeMgmt.addEventListener('change', async (e) => {
         const selectedUserId = e.target.value;
         const employee = allEmployeeList.find(emp => emp.userId === selectedUserId);
+        currentManagingEmployee = allEmployeeList.find(emp => emp.userId === selectedUserId);
+
+        console.log("22Selected employee for calendar:", currentManagingEmployee);
         if (employee) {
             // 修正屬性名稱：src 和您的資料屬性
             mgmtEmployeeName.textContent = employee.name;
@@ -1565,6 +1567,63 @@ function resolveHourlyRateForExport() {
     const base = empSalary || inputSalary || 28950;
     const standardMonthHours = 240;
     return { baseMonthly: base, hourlyRate: base > 0 ? (base / standardMonthHours) : 0 };
+}
+/**
+ * 切換員工的帳號啟用（）
+ * @param {string} userId - 員工的 userId
+ * @param {boolean} isChecked - 是否勾選（true 表示開啟帳號啟用）
+ */
+async function togglePermissionsStatus(userId, isChecked) {
+    console.log(`正在將員工 ${userId} 的帳號啟用設定為: ${isChecked}`);
+    try {
+        const res = await callApifetch({ action: "switchPermissions", userId, isChecked: isChecked });
+        if (res && res.ok) {
+            showNotification("API 成功！回應：" + JSON.stringify(res), "success");
+        } else {
+            showNotification("API 測試失敗：" + (res ? res.msg : "無回應資料"), "error");
+        }
+    } catch (error) {
+        console.error("API 呼叫發生錯誤:", error);
+        showNotification("API 呼叫失敗，請檢查網路連線或後端服務。", "error");
+    }
+}
+/**
+ * 切換員工的管理員權限
+ * @param {string} userId - 員工的 userId
+ * @param {boolean} isChecked - 是否勾選（true 表示開啟管理員權限）
+ */
+async function toggleEnableStatus(userId, isChecked) {
+    console.log(`正在切換員工 ${userId} 的帳號啟用設定為: ${isChecked}`);
+    try {
+        const res = await callApifetch({ action: "switchEnable", userId, isChecked: isChecked });
+        if (res && res.ok) {
+            showNotification("API 成功！回應：" + JSON.stringify(res), "success");
+        } else {
+            showNotification("API 測試失敗：" + (res ? res.msg : "無回應資料"), "error");
+        }
+    } catch (error) {
+        console.error("API 呼叫發生錯誤:", error);
+        showNotification("API 呼叫失敗，請檢查網路連線或後端服務。", "error");
+    }
+}
+/**
+ * 設定員工的薪資
+ * @param {string} userId - 員工的 userId
+ * @param {number} salary - 員工的薪資
+ */
+async function setEmployeeSalary(userId, salary) {
+    console.log(`正在設定員工 ${userId} 的薪資為: ${salary}`);
+    try {
+        const res = await callApifetch({ action: "setSalary", userId, salary: Number(salary) });
+        if (res && res.ok) {
+            showNotification("API 成功！回應：" + JSON.stringify(res), "success");
+        } else {
+            showNotification("API 測試失敗：" + (res ? res.msg : "無回應資料"), "error");
+        }
+    } catch (error) {
+        console.error("API 呼叫發生錯誤:", error);
+        showNotification("API 呼叫失敗，請檢查網路連線或後端服務。", "error");
+    }
 }
 // #endregion
 // ===================================
